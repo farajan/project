@@ -15,5 +15,6 @@
 }
 
 .scrollMenu .search {
-    margin-left: 0px;
+    position: relative;
+    bottom: 5px;
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { AngularFireDatabase, FirebaseObjectObservable, FirebaseListObservable  } from 'angularfire2/database';
+import { AngularFireDatabase, FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2/database';
 import * as firebase from 'firebase/app';
 
 @Component({
@@ -14,20 +14,21 @@ export class ListComponent implements OnInit {
   items: FirebaseListObservable<any[]>;
   food: FirebaseListObservable<any[]>;
   private id: string = '';
+  private checked: string[] = [];
 
   constructor(private db: AngularFireDatabase,
-              public activatedRoute: ActivatedRoute,
-              private router: Router) {
+    public activatedRoute: ActivatedRoute,
+    private router: Router) {
     this.activatedRoute.params.subscribe((params: Params) => {
       this.id = params['id'];
-      this.item = db.object('/items/' + this.id);
-      this.items = db.list('/food');
-      this.food = db.list('/food', {
-        query: {
-          orderByChild: 'lid',
-          equalTo: this.id
-        }
-      });
+    });
+    this.item = db.object('/items/' + this.id);
+    this.items = db.list('/food');
+    this.food = db.list('/food', {
+      query: {
+        orderByChild: 'lid',
+        equalTo: this.id
+      }
     });
   }
 
@@ -39,7 +40,7 @@ export class ListComponent implements OnInit {
   }
 
   public searchItems(name: string): void {
-    console.log('name: '+name);
+    console.log('name: ' + name);
     this.food = this.db.list('/food', {
       query: {
         orderByChild: 'value',
@@ -48,10 +49,24 @@ export class ListComponent implements OnInit {
     });
   }
 
-  public deleteList() : void {
+  public deleteList(): void {
     this.item.remove();
     this.router.navigate(['/lists']);
-    }
+  }
 
+  public onChange(id: string, flag): void {
+    console.log(id + " : " + flag);
+    if (flag) {
+      this.checked.push(id);
+    } else {
+      this.checked = this.checked.filter(item => item.toString() !== id);
+    }
+  }
+
+  public deleteItems(): void {
+    this.checked.forEach(element => {
+      this.items.remove(element);
+    });
+  }
 
 }

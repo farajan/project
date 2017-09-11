@@ -5,41 +5,7 @@
   <div class="row">
     <br>
     <div class="col-3">
-
-      <ul class="nav flex-column">
-        <li class="nav-item">
-          <a class="nav-link active" href="#">
-              <i class="fa fa-list" aria-hidden="true"></i>
-            Items
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">
-              <i class="fa fa-share-alt" aria-hidden="true"></i>
-              Share with group
-            </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">
-                <i class="fa fa-download" aria-hidden="true"></i>
-                Download list
-              </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">
-              <i class="fa fa-pencil" aria-hidden="true"></i>
-            Rename list
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#" (click)="deleteList()">
-              <i class="fa fa-times" aria-hidden="true"></i>
-            Delete list
-          </a>
-        </li>
-      </ul>
-
-
+      <app-listmenu></app-listmenu>
     </div>
     <div class="col-8">
       <h4>Items:</h4>
@@ -49,7 +15,7 @@
           <div class="col-3"></div>
           <div class="col-4">
             <span class="text">delete selected items&nbsp;</span>
-            <button type="button" (click)="searchItems(searchItem.value)" class="btn btn-sm btn-primary">Delete</button>
+            <button type="button" (click)="deleteItems()" class="btn btn-sm btn-primary">Delete</button>
           </div>
           <div class="row">
             <div class="col-8">
@@ -67,20 +33,18 @@
       <div class="scroll">
         <ul class="list-group">
           <li class="list-group-item" *ngFor="let i of food | async">
-
             <label class="custom-control custom-checkbox">
-              <input type="checkbox" class="custom-control-input">
+              <input type="checkbox" class="custom-control-input" id="i.value" #cv [checked]=false                                       
+              (change)="onChange(i?.$key,cv.checked)">
               <span class="custom-control-indicator"></span>
               <span class="custom-control-description">{{i?.value}}</span>
             </label>
-
-
-
           </li>
         </ul>
       </div>
       <br>
       <form>
+        <h6>Add new item</h6>
         <div class="row">
           <div class="col-4">
             <input type="text" class="form-control" [(ngModel)]="newItemName" name="newItem" #newItem="ngModel">
@@ -88,6 +52,7 @@
           <button type="button" (click)="addItem(newItem.value)" class="btn btn-md btn-primary">Add</button>
         </div>
       </form>
+      <br>
     </div>
   </div>
 

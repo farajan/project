@@ -1,3 +1,94 @@
-<p>
-  list works!
-</p>
+<div class="container">
+  <h2>{{ (item | async)?.value }}</h2>
+  <br>
+
+  <div class="row">
+    <br>
+    <div class="col-3">
+
+      <ul class="nav flex-column">
+        <li class="nav-item">
+          <a class="nav-link active" href="#">
+              <i class="fa fa-list" aria-hidden="true"></i>
+            Items
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">
+              <i class="fa fa-share-alt" aria-hidden="true"></i>
+              Share with group
+            </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">
+                <i class="fa fa-download" aria-hidden="true"></i>
+                Download list
+              </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">
+              <i class="fa fa-pencil" aria-hidden="true"></i>
+            Rename list
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" (click)="deleteList()">
+              <i class="fa fa-times" aria-hidden="true"></i>
+            Delete list
+          </a>
+        </li>
+      </ul>
+
+
+    </div>
+    <div class="col-8">
+      <h4>Items:</h4>
+      <div class="scrollMenu">
+
+        <div class="row">
+          <div class="col-3"></div>
+          <div class="col-4">
+            <span class="text">delete selected items&nbsp;</span>
+            <button type="button" (click)="searchItems(searchItem.value)" class="btn btn-sm btn-primary">Delete</button>
+          </div>
+          <div class="row">
+            <div class="col-8">
+              <span class="search">
+              <input type="text" class="form-control" [(ngModel)]="searchItemName" name="searchItem" #searchItem="ngModel" id="formGroupExampleInput"
+                placeholder="Search item">
+              </span>
+            </div>
+            <div class="col">
+              <button type="button" (click)="searchItems(searchItem.value)" class="btn btn-sm btn-primary">Search</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="scroll">
+        <ul class="list-group">
+          <li class="list-group-item" *ngFor="let i of food | async">
+
+            <label class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input">
+              <span class="custom-control-indicator"></span>
+              <span class="custom-control-description">{{i?.value}}</span>
+            </label>
+
+
+
+          </li>
+        </ul>
+      </div>
+      <br>
+      <form>
+        <div class="row">
+          <div class="col-4">
+            <input type="text" class="form-control" [(ngModel)]="newItemName" name="newItem" #newItem="ngModel">
+          </div>
+          <button type="button" (click)="addItem(newItem.value)" class="btn btn-md btn-primary">Add</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+</div>

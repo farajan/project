@@ -7,5 +7,7 @@ import { User } from '../model/user';
 
 export class Service {
     public user: User;
-    constructor() {}
+    constructor() {
+        this.user = new User(); 
+    }
 }

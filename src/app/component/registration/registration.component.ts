@@ -25,10 +25,12 @@ export class RegistrationComponent implements OnInit {
   public users: FirebaseListObservable<any[]>;
   public userAlreadyExist: boolean;
 
+
   constructor(
     private modalService: NgbModal,
     private service: Service,
-    private db: AngularFireDatabase) {
+    private db: AngularFireDatabase,
+    public afAuth: AngularFireAuth) {
     // this.users = db.list('/users');
   }
 
@@ -41,38 +43,10 @@ export class RegistrationComponent implements OnInit {
     this.modalWindow = this.modalService.open(content);
   }
 
-  public registerUser(login: string) {
-    console.log(login);
-
-    firebase.database().ref().child('users');
-    this.users = this.db.list('/users', {
-      query: {
-        orderByChild: 'email',
-        equalTo: login
-      }
-    });
-  }
-
   public addNewUser() {
-    const auth = firebase.auth();
-    auth.createUserWithEmailAndPassword(this.user.email, this.user.password);
-  //   console.log(this.user.email);
-
-  //   this.registerUser(this.user.email);
-
-
-  //   let dbRef: firebase.database.Reference = firebase.database().ref('users');
-  //   dbRef.push({ email: this.user.email, password: this.user.password, uid: '1' })
-  //     .then(
-  //     resolve => {
-  //       console.log(resolve.key);
-  //       firebase.database().ref('users/' + resolve.key).update({ uid: resolve.key });
-  //     }
-  //     );
-
-  //   this.modalWindow.close();
-  //   this.user = new User();
-  //   this.userAlreadyExist = false;
-  //   console.log('user does not alredy exists');
+    this.afAuth.auth.createUserWithEmailAndPassword(this.user.email, this.user.password).then(
+      function (result) {
+      });
+    this.modalWindow.close();
   }
 }

@@ -1,3 +1,4 @@
+import { ErrorLine } from 'tslint/lib/verify/lines';
 import { Component, OnInit, NgModule } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Router } from '@angular/router';
@@ -15,10 +16,13 @@ import { AngularFireDatabase } from 'angularfire2/database';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
+
 export class LoginComponent implements OnInit {
 
   user: Observable<firebase.User>;
   public myUser: User;
+  public loginFaild: boolean; //--
+  public auth: boolean;
 
   constructor(public afAuth: AngularFireAuth,
     public userService: Service,
@@ -29,32 +33,31 @@ export class LoginComponent implements OnInit {
       if (user) {
         this.userService.user = new User(user.uid, user.email, user.photoURL);
         this.myUser = new User(user.uid, user.email, user.photoURL);
-        firebase.database().ref('/users').push({ email: this.myUser.email, uid: this.myUser.uid });       //--
+        let dbRef: firebase.database.Reference = firebase.database().ref('users').child(this.userService.user.uid);
+        dbRef.set({ email: this.userService.user.email });
         this.router.navigate(['/lists']);
+        this.loginFaild = false;
       } else {
         this.userService.user = null;
+        this.loginFaild = true;
       }
     });
+
   }
 
   public authentication() {
-    this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider())
-      .then(function (result) {
-      }
-      );
-
+    this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider()).then(function (result) {});
+    this.auth = true;
   }
-  public login(email, password): void { //--
-    // console.log('email: ' + email);
-    // console.log('password: ' + password);
-    // return this.afAuth.auth.signInWithEmailAndPassword(
-    //   email: email,
-    //   password: password
-    // );
+
+  public login(email, password): void {
+    this.afAuth.auth.signInWithEmailAndPassword(email, password).then(function (result) {});
+    this.auth = true;
   }
 
   ngOnInit() {
     this.myUser = new User('', '', '');
+    this.auth = false;
   }
 
 

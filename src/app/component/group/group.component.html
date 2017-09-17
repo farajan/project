@@ -9,52 +9,20 @@
     </div>
     <div class="col-8">
       <h4>Friends in group:</h4>
-      <div class="scrollMenu">
-
-        <div class="row">
-          <div class="col-3"></div>
-          <div class="col-4">
-            <span class="text">delete selected friends&nbsp;</span>
-            <button type="button" (click)="deleteItems()" class="btn btn-sm btn-primary">Delete</button>
-          </div>
-          <div class="row">
-            <div class="col-8">
-              <span class="search">
-              <input type="text" class="form-control" [(ngModel)]="searchItemName" name="searchItem" #searchItem="ngModel" id="formGroupExampleInput"
-                placeholder="Search item">
-              </span>
-            </div>
-            <div class="col">
-              <button type="button" (click)="searchItems(searchItem.value)" class="btn btn-sm btn-primary">Search</button>
-            </div>
-          </div>
-        </div>
-      </div>
       <div class="scroll">
         <ul class="list-group">
-          <li class="list-group-item" *ngFor="let i of food | async">
-            <label class="custom-control custom-checkbox">
-              <input type="checkbox" class="custom-control-input" id="i.value" #cv [checked]=false                                       
-              (change)="onChange(i?.$key,cv.checked)">
-              <span class="custom-control-indicator"></span>
-              <span class="custom-control-description">{{i?.value}}</span>
-            </label>
+          <li class="list-group-item" *ngFor="let friend of friends | async">
+            <!-- {{friend | json}} -->
+            console.log(friend.uid);
+            <p>{{findFriend(friend.uid)}} </p>
+            <p> {{(this.actFriend | async)?.email}}</p>
           </li>
         </ul>
       </div>
       <br>
-      <form>
-
-        <h6>Add new friend</h6>
-        <div class="row">
-          <div class="col-4">
-            <input type="text" class="form-control" [(ngModel)]="newItemName" name="newItem" #newItem="ngModel">
-          </div>
-          <button type="button" (click)="addFriend()" class="btn btn-md btn-primary">Add</button>
-        </div>
-      </form>
       <br>
     </div>
   </div>
 
+  <app-search-friend name="group"></app-search-friend>
 </div>

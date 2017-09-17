@@ -31,6 +31,8 @@ import { GroupComponent } from './component/group/group.component';
 import { GroupmenuComponent } from './component/groupmenu/groupmenu.component';
 
 
+import { AddItemComponent } from './component/add-item/add-item.component';
+import { GroupListsComponent } from './component/group-lists/group-lists.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +53,9 @@ import { GroupmenuComponent } from './component/groupmenu/groupmenu.component';
     SearchFriendComponent,
     AddgroupComponent,
     GroupComponent,
-    GroupmenuComponent
+    GroupmenuComponent,
+    AddItemComponent,
+    GroupListsComponent
   ],
   imports: [
     router,

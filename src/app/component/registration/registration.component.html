@@ -22,7 +22,7 @@
 
 
   <div class="modal-body">
-    {{this.service.user | json}}
+    <!-- {{this.service.user | json}} -->
 
     <form (ngSubmit)="addNewUser()">
       <div class="form-group">
@@ -39,9 +39,6 @@
         </div>
       </div>
       <button type="submit" [disabled]="email.invalid || password.invalid" class="btn btn-primary">Save</button>
-      <div *ngFor="let i of users">
-            email: {{i.email}}
-          </div>
     </form>
   </div>
 </ng-template>

@@ -10,11 +10,9 @@
   </div>
 </div>
 
-<ul class="list-group" style="width: 31rem; height: 2rem">
-  <div *ngFor="let actUser of users">
-    <li class="list-group-item">
-      {{actUser?.email}}
-      <button class="btn-link" (click)="addFriend(actUser.$key)"> <i class="fa fa-star-o" aria-hidden="true"></i> </button>
-    </li>
-  </div>
+<ul class="list-group" style="width: 31rem; height: 2rem" *ngFor="let user of users">
+  <li class="list-group-item">
+    {{user?.email}}
+    <button class="btn-link" (click)="addFriend(user.$key)"> <i class="fa fa-star-o" aria-hidden="true"></i> </button>
+  </li>
 </ul>

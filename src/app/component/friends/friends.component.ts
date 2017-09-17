@@ -3,9 +3,6 @@ import { Subject } from 'rxjs/Subject';
 import { AngularFireDatabase, FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2/database';
 
 
-// import { FirebaseObjectFactoryOpts } from 'angularfire2/interfaces';
-
-
 import { Component, OnInit, NgModule } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Router } from '@angular/router';
@@ -23,7 +20,8 @@ import { Service } from '../../service/service';
   styleUrls: ['./friends.component.css']
 })
 export class FriendsComponent implements OnInit {
-  public actFriend: FirebaseListObservable<any[]>;
+
+  public myFriend: FirebaseObjectObservable<User>;
   public friend: FirebaseObjectObservable<any>;
   public friends: FirebaseListObservable<any[]>;
 
@@ -31,6 +29,7 @@ export class FriendsComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log(this.actUser.user.uid);
     this.friends = this.db.list('/friends', {
       query: {
         orderByChild: 'friend2',
@@ -39,18 +38,14 @@ export class FriendsComponent implements OnInit {
     });
   }
 
-
-  public deleteFriend(id): void {
+  public deleteFriend(id: string): void {
     this.friend = this.db.object('/friends/' + id);
     this.friend.remove();
   }
 
-  public findFriend(id): void {
-    this.actFriend = this.db.list('/users', {
-      query: {
-        orderByChild: 'uid',
-        equalTo: id
-      }
-    });
+  public findFriend(id: string): FirebaseObjectObservable<User> {
+    // return id;
+    return  this.db.object('/users/' + id);
+    // this.myFriend =   this.db.object('/users/' + id);
   }
 }

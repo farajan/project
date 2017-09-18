@@ -1,14 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModalRef, NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-import { ActivatedRoute, Params } from '@angular/router';
 import { FirebaseListObservable, FirebaseObjectObservable, AngularFireDatabase } from 'angularfire2/database';
+import { ActivatedRoute, Params } from '@angular/router';
 
 @Component({
-  selector: 'app-groupmenu',
-  templateUrl: './groupmenu.component.html',
-  styleUrls: ['./groupmenu.component.css']
+  selector: 'app-group-lists-menu',
+  templateUrl: './group-lists-menu.component.html',
+  styleUrls: ['./group-lists-menu.component.css']
 })
-export class GroupmenuComponent implements OnInit {
+export class GroupListsMenuComponent implements OnInit {
+
   private modalWindow: NgbModalRef;
   public closeResult: String;
   groups: FirebaseListObservable<any[]>;

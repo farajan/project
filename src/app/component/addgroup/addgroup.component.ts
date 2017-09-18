@@ -18,7 +18,7 @@ export class AddgroupComponent implements OnInit {
 
   constructor(private modalService: NgbModal,
     public db: AngularFireDatabase,
-    public myUser: Service) { }
+    public actUser: Service) { }
 
   ngOnInit() {
     
@@ -40,7 +40,8 @@ export class AddgroupComponent implements OnInit {
   }
 
   private addGroup(name: string) {
-    firebase.database().ref('/groups').push({ uid: this.myUser.user.uid, name: name });
+    let dbRef = firebase.database().ref('/groups').push({ uid: this.actUser.user.uid, name: name });
+    firebase.database().ref('/groups/' + dbRef.key + '/friends').push({ uid: this.actUser.user.uid });
     this.modalWindow.close();
   }
 }

@@ -46,14 +46,11 @@ export class SearchFriendComponent implements OnInit {
   }
 
   public addFriend(id: string): void {
-    console.log(this.name);
     if (this.name == "friend") {
-      firebase.database().ref('/friends').push({ friend1: id, friend2: this.actUser.user.uid });
+      firebase.database().ref('/users/' + this.actUser.user.uid + '/friends').child(id).set({uid: id });
     }
     else {
-      console.log('povedlo se');
-      let dbRef: firebase.database.Reference = firebase.database().ref('/groups/' + this.idpar + '/friends').child(id);
-      dbRef.set({ uid: id });
+      firebase.database().ref('/groups/' + this.idpar + '/friends').child(id).set({ uid: id });
     }
   }
 

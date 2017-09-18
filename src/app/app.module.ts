@@ -33,6 +33,8 @@ import { GroupmenuComponent } from './component/groupmenu/groupmenu.component';
 
 import { AddItemComponent } from './component/add-item/add-item.component';
 import { GroupListsComponent } from './component/group-lists/group-lists.component';
+import { GroupListsMenuComponent } from './component/group-lists-menu/group-lists-menu.component';
+import { AddListToGroupComponent } from './component/add-list-to-group/add-list-to-group.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +57,9 @@ import { GroupListsComponent } from './component/group-lists/group-lists.compone
     GroupComponent,
     GroupmenuComponent,
     AddItemComponent,
-    GroupListsComponent
+    GroupListsComponent,
+    GroupListsMenuComponent,
+    AddListToGroupComponent
   ],
   imports: [
     router,

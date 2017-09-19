@@ -12,18 +12,19 @@ export class CardComponent implements OnInit {
 
   items: FirebaseListObservable<any[]>;
 
-    constructor(public db: AngularFireDatabase,
-                public service: Service) {
-//      this.items = db.list('/items');
-      this.items = db.list('/items', {
-      query: {
-        orderByChild: 'uid',
-        equalTo: service.user.uid
-      }
-    });
-    }
+  constructor(public db: AngularFireDatabase,
+    public service: Service) {
+    //      this.items = db.list('/items');
+
+  }
 
   ngOnInit() {
+    this.items = this.db.list('/items', {
+      query: {
+        orderByChild: 'uid',
+        equalTo: this.service.user.uid
+      }
+    });
   }
 
 }

@@ -14,7 +14,11 @@ import { AddlistComponent } from '../component/addlist/addlist.component';
 import * as firebase from 'firebase/app';
 
 
+import * as db from '../../environments/firebase.config'
+// import { mockDbService } from './mockDbService.service'
+
 describe('ListService', () => {
+    
     let db: AngularFireDatabase;
     let listService: ListService;
     let list: List;
@@ -24,6 +28,7 @@ describe('ListService', () => {
 
 
     beforeEach(() => {
+
 
         listService = new ListService(db);
         list = new List('testListName', null, 'test@test.com', 'test');
@@ -57,6 +62,19 @@ describe('ListService', () => {
         expect(listService.list.note).toBe('test');
     });
 
+
+    it('picture()', () => {
+        let pict = listService.picture();
+        expect(pict).toBeDefined;
+    });
+
+    it('random()', () => {
+        let rand = listService.random();
+        expect(rand).toBeGreaterThanOrEqual(0);
+        expect(rand).toBeLessThanOrEqual(9);
+
+    });
+    
     it('addList()', () => {
         var ref = firebase.database;
         // var ref = new FirebaseApp();

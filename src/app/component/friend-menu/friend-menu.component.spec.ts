@@ -1,6 +1,7 @@
 // import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 // import { FriendMenuComponent } from './friend-menu.component';
+// import { AngularFireDatabase } from 'angularfire2/database';
 
 // describe('FriendMenuComponent', () => {
 //   let component: FriendMenuComponent;

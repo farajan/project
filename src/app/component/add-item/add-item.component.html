@@ -4,7 +4,7 @@
     <div class="col">
       <label>Name:</label>
       <input type="text" class="form-control text-capitalize" placeholder="Enter your name of item" (input)="search($event.target.value)"
-        [(ngModel)]="nameOdName" name="newItem" #newItem="ngModel">
+        [(ngModel)]="nameOdName" name="newItem" #newItem="ngModel"/>
 
 
       <ul class="list-group" *ngFor="let i of fItems">
@@ -16,7 +16,7 @@
 
       <label>Quantity:</label>
       <input type="text" class="form-control" placeholder="Enter quality of item" [(ngModel)]="nameOfQuantity" name="newValue"
-        #newValue="ngModel">
+        #newValue="ngModel"/>
     </div>
 
     <div class="col">

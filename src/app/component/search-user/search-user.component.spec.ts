@@ -1,3 +1,4 @@
+// import { FirebaseApp } from 'angularfire2/firebase.app.module';
 // import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 // import { SearchUserComponent } from './search-user.component';
@@ -10,16 +11,13 @@
 //   let fixture: ComponentFixture<SearchUserComponent>;
 
 //   beforeEach(async(() => {
-//     // @NgModule({
-
-
-
+ 
 //       TestBed.configureTestingModule({
 //         declarations: [SearchUserComponent],
-//         imports: [AngularFireAuth]
+//         imports: [ ],
+//         providers: [AngularFireAuth, FirebaseApp ]
 //       })
 //         .compileComponents();
-//     // })
 //   }));
 
 //   beforeEach(() => {
@@ -28,7 +26,7 @@
 //     fixture.detectChanges();
 //   });
 
-//   it('should create', () => {
+//   it('SearchUser component should create', () => {
 //     expect(component).toBeTruthy();
 //   });
 
